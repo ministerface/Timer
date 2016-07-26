@@ -10,11 +10,6 @@ export default class App extends Component {
             id: 1,
             time: 0,
             price:0
-          },
-          {
-            id: 2,
-            time: 0,
-            price:0
           }
         ]
       }
@@ -41,7 +36,7 @@ export default class App extends Component {
     }
 
     start (){
-       this.timer = setInterval(this.tick(), 1000);
+       this.timer = setInterval(this.tick, 1000);
    }
     reset = () => {
       this.setState({time: 0});
