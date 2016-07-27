@@ -1,24 +1,19 @@
 import React, { Component } from 'react';
+require('./styles/main.scss');
 
 export default class App extends Component {
 
     constructor(props){
       super(props)
       this.state = {
-        counters: [
-          {
-            id: 1,
-            time: 0,
-            price:0
-          }
-        ]
+        counters: []
       }
     }
 
     tick = () => {
 
-      var peeps = this.state.counters;
-      var index = 0
+      const peeps = this.state.counters;
+      const index = 0
 
       peeps[index].time = this.state.counters[0].time + 1;
       peeps[index].price = this.state.counters[0].price + 100
@@ -30,6 +25,9 @@ export default class App extends Component {
 
     componentDidMount () {
       //this.timer = setInterval(this.tick, 1000);
+      if (!this.state.counters.length) {
+        this.addTimer();
+      }
     }
     componentWillUnmount (){
       clearInterval(this.timer)
@@ -46,15 +44,31 @@ export default class App extends Component {
       clearInterval(this.timer);
     }
 
+    addTimer = () => {
+        const peeps = this.state.counters;
+
+    peeps.unshift({
+        name:'Новый счетчик',
+        time:0,
+        price:0
+      });
+      
+      this.setState(
+        {counters: peeps}
+      );
+
+
+    }
+
     render (){
 
       return(
         <div className="">
 
-          <div ><p className="text"> This experiment started {this.state.time} seconds ago.</p></div>
+          <div ><h1 className="text"> This experiment started {this.state.time} seconds ago.</h1></div>
           <button className="waves-effect waves-light yellow darken-1 btn" onClick={this.pause}>pause</button>
           <button className="waves-effect waves-light green lighten-1 btn" onClick={this.start.bind(this)}>start</button>
-          <button className="waves-effect waves-light  red darken-1 btn" onClick={this.reset}>reset</button>
+          <button className="waves-effect waves-light  red darken-1 btn" onClick={this.addTimer.bind(this)}>add</button>
           </div>
 
 
