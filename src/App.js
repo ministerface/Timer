@@ -36,6 +36,14 @@ export default class App extends Component {
       clearInterval(this.timer)
     }
 
+    secToTime(sec) {
+      dt = new Date();
+      dt.setTime(sec*1000);
+      return dt.getUTCHours()+':'+dt.getUTCMinutes()+':'+dt.getUTCSeconds();
+    }
+
+
+
     start (){
        this.timer = setInterval(this.tick, 1000);
    }
