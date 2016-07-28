@@ -1,25 +1,28 @@
 import React, { Component } from 'react';
+import ListOfTimers from './ListOfTimer';
+import Timer from './Timer';
 require('./styles/main.scss');
 
-export default class App extends Component {
 
+
+
+export default class App extends Component {
     constructor(props){
-      super(props)
+      super(props);
       this.state = {
         counters: []
       }
     }
 
     tick = () => {
-
-      const peeps = this.state.counters;
+      const { counters } = this.state;
       const index = 0
 
-      peeps[index].time = this.state.counters[0].time + 1;
-      peeps[index].price = this.state.counters[0].price + 100
+      counters[index].time = this.state.counters[0].time + 1;
+      counters[index].price = this.state.counters[0].price + 100
 
       this.setState(
-        {counters: peeps}
+        {counters: counters}
       );
     }
 
@@ -45,16 +48,16 @@ export default class App extends Component {
     }
 
     addTimer = () => {
-        const peeps = this.state.counters;
+        const { counters } = this.state;
 
-    peeps.unshift({
+    counters.unshift({
         name:'Новый счетчик',
         time:0,
         price:0
       });
-      
+
       this.setState(
-        {counters: peeps}
+        {counters: counters}
       );
 
 
@@ -63,15 +66,10 @@ export default class App extends Component {
     render (){
 
       return(
-        <div className="">
+        <div className="timer-app">
+        <Timer />
 
-          <div ><h1 className="text"> This experiment started {this.state.time} seconds ago.</h1></div>
-          <button className="waves-effect waves-light yellow darken-1 btn" onClick={this.pause}>pause</button>
-          <button className="waves-effect waves-light green lighten-1 btn" onClick={this.start.bind(this)}>start</button>
-          <button className="waves-effect waves-light  red darken-1 btn" onClick={this.addTimer.bind(this)}>add</button>
-          </div>
-
-
+        </div>
       )
     };
 
