@@ -5,23 +5,37 @@ body {
 }
 
 
-.timer-background .timer-body {
-	border-bottom: none;
+.add-button {
+	padding: 10px 20px;
+background: #7c919c;
+margin: 20px auto 0px;
+cursor: pointer;
+text-align: center;
+color: #fff;
 }
 
-.timer-background .timer-body:last-child {
-	    border: 1px solid #dcdcdc;
+.add-button:hover {
+	    background: #5e6d75;
+}
+
+.timer-background .timer-body {
+	border-top: none;
+
+}
+
+.timer-background .timer-body:first-child {
+	  border-top: 1px solid #dcdcdc;
 }
 
 
 .timer-background
 		{
-			width: 364px;
-			height: 234px;
-			padding-left: 36px;
-			padding-top: 66px;
-			margin-left: auto;
-			margin-right: auto;
+			width: 320px;
+    padding: 20px;
+    border: 1px solid #dcdcdc;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
 		}
 
 		.timer-body
@@ -48,7 +62,7 @@ body {
 		{
 			height: 45px;
 			height: 40px;
-		    background-color: #f2f3f7;
+		      background-color: #f8fbff;
 			border-top: 1px solid #ffffff;
 			border-radius: 0px 0px 5px 5px;
 		}
@@ -64,13 +78,12 @@ body {
 		{
 			width: 146px;
 			height: 29px;
-			float: left;
 			color: #7e97ab;
 			font-size: 14px;
 			font-weight: 400;
 			padding-top: 12px;
-			padding-right: 13px;
-			text-align: right;
+			padding-left: 15px;
+
 		}
 
 		.timer-controls
