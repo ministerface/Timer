@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ListOfTimers from './ListOfTimer';
-import Timer from './Timer';
+import AddTimer from './AddTimer';
+
 require('./styles/main.scss');
 
 
@@ -14,6 +15,7 @@ export default class App extends Component {
       }
     }
 
+
     tick = () => {
       const { counters } = this.state;
       const index = 0
@@ -26,57 +28,48 @@ export default class App extends Component {
       );
     }
 
-    componentDidMount () {
-      //this.timer = setInterval(this.tick, 1000);
-      if (!this.state.counters.length) {
-        this.addTimer();
+
+      start (id){
+        console.log(id);
+         //this.timer = setInterval(this.tick, 1000);
       }
-    }
-    componentWillUnmount (){
-      clearInterval(this.timer)
-    }
+      reset = () => {
+        this.setState({time: 0});
+      }
 
-    secToTime(sec) {
-      dt = new Date();
-      dt.setTime(sec*1000);
-      return dt.getUTCHours()+':'+dt.getUTCMinutes()+':'+dt.getUTCSeconds();
-    }
-
-
-
-    start (){
-       this.timer = setInterval(this.tick, 1000);
-   }
-    reset = () => {
-      this.setState({time: 0});
-    }
-
-    pause = () =>{
-      clearInterval(this.timer);
-    }
+      pause = () =>{
+        clearInterval(this.timer);
+      }
 
     addTimer = () => {
+
         const { counters } = this.state;
+        counters.unshift({
 
-    counters.unshift({
-        name:'Новый счетчик',
-        time:0,
-        price:0
-      });
+          name:'Новый счетчик',
+          time:0,
+          price:0
+        });
 
-      this.setState(
-        {counters: counters}
-      );
-
-
+        this.setState(
+          {counters: counters}
+        );
     }
 
+
+
+
     render (){
+      const actions = {
+        start: this.start,
+        pause: this.pause
+      }
+
 
       return(
         <div className="timer-app">
-        <Timer />
-
+          <ListOfTimers action={actions} counters={this.state.counters}/>
+          <AddTimer action={this.addTimer}/>
         </div>
       )
     };

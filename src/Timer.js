@@ -1,22 +1,59 @@
 import React, { Component } from 'react';
 export default class Timer extends Component {
 
+
+
+
+  componentDidMount () {
+    //this.timer = setInterval(this.tick, 1000);
+    //if (!this.state.counters.length) {
+      //this.addTimer();
+    //}
+  }
+  componentWillUnmount (){
+    clearInterval(this.timer)
+  }
+
+  addZero (i) {
+
+    if (i < 10) {
+        i = '0' + i;
+    }
+    return i;
+}
+
+  secToTime(sec) {
+    let dt = new Date();
+    dt.setTime(sec*1000);
+
+    return this.addZero(dt.getUTCHours())+':'+this.addZero(dt.getUTCMinutes())+':'+this.addZero(dt.getUTCSeconds());
+  }
+
+
+
+
+
+
 render() {
+  const {name, price, time } = this.props.data;
+  const {start} = this.props.action;
+  const formatSec = this.secToTime(time);
+
+
   return(
 
-    <div className="timer-background">
       <div className="timer-body">
         <div className="timer-top">
 
           <div className="timer-title">
-            Разработка сайта
+          {name}
           </div>
         </div>
         <div className="timer-middle">
           <div className="timer-controls">
             <div className="play-control-outer control-outer" onclick="start_timer();">
               <div className="control-inner">
-                <div className="control-icon control-icon-play">
+                <div onClick={start} className="control-icon control-icon-play">
                   <i className="material-icons">&#xE037;</i>
                 </div>
               </div>
@@ -38,7 +75,7 @@ render() {
           </div>
           <div className="timer-numbers-block">
             <div className="timer_numbers" id="timer_numbers">
-              00:00:00
+              {formatSec}
             </div>
             <div className="timer_number_titles">
               <div className="timer_number_hour">
@@ -58,12 +95,11 @@ render() {
             Стоимость
           </div>
           <div className="timer-current-time" id="timer-current-time">
-            500 руб.
+            {price} руб.
           </div>
         </div>
       </div>
-      <div className="add-button">Новый таймер</div>
-    </div>
+
 
   );
 }
