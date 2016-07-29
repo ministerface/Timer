@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import classnames from 'classnames';
+
+
 export default class Timer extends Component {
 
 
@@ -37,14 +40,18 @@ export default class Timer extends Component {
       this.props.action.pause(this.props.data.id);
   }
 
+  reset() {
+      this.props.action.reset(this.props.data.id);
+  }
+
 
 
 
 render() {
-  const {name, price, time } = this.props.data;
+  const {active, name, price, time } = this.props.data;
   const {start} = this.props.action;
   const formatSec = this.secToTime(time);
-
+  let classes = classnames('play-control-outer control-outer', {active: active.start});
 
   return(
 
@@ -52,12 +59,12 @@ render() {
         <div className="timer-top">
 
           <div className="timer-title">
-          {name}
+            {name}
           </div>
         </div>
         <div className="timer-middle">
           <div className="timer-controls">
-            <div className="play-control-outer control-outer" onclick="start_timer();">
+            <div className={classes} onclick="start_timer();">
               <div className="control-inner">
                 <div onClick={this.start.bind(this)} className="control-icon control-icon-play">
                   <i className="material-icons">&#xE037;</i>
@@ -73,7 +80,7 @@ render() {
             </div>
             <div className="reset-control-outer control-outer" onclick="reset_timer();">
               <div className="control-inner">
-                <div className="control-icon">
+                <div onClick={this.reset.bind(this)} className="control-icon">
                   <i className="material-icons">&#xE028;</i>
                 </div>
               </div>
