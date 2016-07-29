@@ -29,7 +29,13 @@ export default class Timer extends Component {
     return this.addZero(dt.getUTCHours())+':'+this.addZero(dt.getUTCMinutes())+':'+this.addZero(dt.getUTCSeconds());
   }
 
+  start() {
+    this.props.action.start(this.props.data.id);
+  }
 
+  pause() {
+      this.props.action.pause(this.props.data.id);
+  }
 
 
 
@@ -53,14 +59,14 @@ render() {
           <div className="timer-controls">
             <div className="play-control-outer control-outer" onclick="start_timer();">
               <div className="control-inner">
-                <div onClick={start} className="control-icon control-icon-play">
+                <div onClick={this.start.bind(this)} className="control-icon control-icon-play">
                   <i className="material-icons">&#xE037;</i>
                 </div>
               </div>
             </div>
             <div className="stop-control-outer control-outer" onclick="stop_timer();">
               <div className="control-inner">
-                <div className="control-icon control-icon-stop">
+                <div onClick={this.pause.bind(this)} className="control-icon control-icon-stop">
                   <i className="material-icons">&#xE034;</i>
                 </div>
               </div>

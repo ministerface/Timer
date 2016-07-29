@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ListOfTimers from './ListOfTimer';
 import AddTimer from './AddTimer';
+import { v4 } from 'node-uuid';
 
 require('./styles/main.scss');
 
@@ -16,9 +17,9 @@ export default class App extends Component {
     }
 
 
-    tick = () => {
+    tick = (id) => {
       const { counters } = this.state;
-      const index = 0
+      const index = counters.findIndex( (el) => el.id === this.id );
 
       counters[index].time = this.state.counters[0].time + 1;
       counters[index].price = this.state.counters[0].price + 100
@@ -29,9 +30,10 @@ export default class App extends Component {
     }
 
 
-      start (id){
-        console.log(id);
-         //this.timer = setInterval(this.tick, 1000);
+      start = (id) => {
+        this.id = id;
+      this.timer = setInterval(this.tick, 1000);
+
       }
       reset = () => {
         this.setState({time: 0});
@@ -45,7 +47,7 @@ export default class App extends Component {
 
         const { counters } = this.state;
         counters.unshift({
-
+          id: v4(),
           name:'Новый счетчик',
           time:0,
           price:0

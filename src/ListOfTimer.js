@@ -13,7 +13,7 @@ render() {
     const action = this.props.action;
 
     let counters = this.props.counters.map(function(counter, i) {
-                return <Timer  key={i} data={counter} action={action}/>
+                return <Timer  key={counter.id} data={counter} action={action}/>
     });
 
     return (
